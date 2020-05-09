@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:sec="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.w3.org/1999/xhtml"
+>
+
+<head>
+    <meta charset="utf-8">
+
+    <link href="/webjars/bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet" />
+    <script type="text/javascript" src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="..static/deleteUser.js" th:src="@{/deleteUser.js}"></script>
+    <script type="text/javascript" src="..static/addUser.js" th:src="@{/addUser.js}"></script>
+    <script type="text/javascript" src="..static/getTableContent.js" th:src="@{/getTableContent.js}"></script>
+    <script type="text/javascript" src="..static/updateUser.js" th:src="@{/updateUser.js}"></script>
+    <script type="text/javascript" src="..static/fillEditModal.js" th:src="@{/fillEditModal.js}"></script>
+
+    <title>Task 3-1-3</title>
+
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+<div class="wrapper">
+    <!-- Sidebar  -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h3>Task 3-1-3</h3>
+        </div>
+
+        <ul class="list-unstyled components">
+
+            <li>
+                <a href="#">Admin</a>
+            </li>
+
+            <li>
+                <a href="#">User</a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+    <!-- Page Content  -->
+    <div id="content">
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+            <div class="container-fluid">
+
+                <div>
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fas fa-align-left"></i>
+                        <span>Toggle Sidebar </span>
+                    </button>
+                </div>
+
+                <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-align-justify"></i>
+                </button>
+
+                <div class="collapse navbar-collapse text-left text-light" id="navbarSupportedContent" sec:authorize="isAuthenticated()">
+
+                    <div class="navbar-brand" sec:authorize="isAuthenticated()">
+                        User ID: <span sec:authentication="principal.id"></span>
+                        Logged user: <span sec:authentication="name"></span>
+                        Roles: <span sec:authentication="principal.authorities"></span>
+                    </div>
+
+                    <div class="navbar-nav ml-auto">
+                        <a class="nav-link" href="/logout">Logout Page</a>
+                    </div>
+
+                </div>
+            </div>
+        </nav>
+
+        <h3>Admin Panel</h3>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    <div class="card mt-3 tab-card">
+                        <div class="card-header tab-card-header">
+                            <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+
+                                <li class="nav-item active">
+                                    <a class="nav-link" id="usersTableTab" data-toggle="tab" href="#one" role="tab" aria-controls="One" aria-selected="true">Users Table</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="two-tab" data-toggle="tab" href="#two" role="tab" aria-controls="Two" aria-selected="false">New User</a>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                        <div class="tab-content" id="myTabContent">
+
+                            <div class="tab-pane fade show active p-3" id="one" role="tabpanel" aria-labelledby="one-tab">
+                                <h5 class="card-title">All Users</h5>
+
+                                <table class="table table-bordered table-striped" id="tableOfAllUsers">
+
+                                    <thead class="thead-dark">
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Name</th>
+                                        <th>Login</th>
+                                        <th>Password</th>
+                                        <th>Role</th>
+                                        <th>Delete</th>
+                                        <th>Edit</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="tab-pane fade p-3" id="two" role="tabpanel" aria-labelledby="two-tab">
+                                <div class="card-header text-left">Add new user</div>
+
+                                        <div class="d-flex flex-column">
+                                            <div class="form-group text-center">
+                                                <label for="userIdToAdd">ID</label>
+                                                <input type="text" id="userIdToAdd" class="form-control" placeholder="Enter ID" name="id"/>
+                                            </div>
+
+                                            <div class="form-group text-center">
+                                                <label for="userNameToAdd">Name</label>
+                                                <input type="text" id="userNameToAdd" class="form-control" placeholder="Enter Name" name="name"/>
+                                            </div>
+
+                                            <div class="form-group text-center">
+                                                <label for="userLoginToAdd">Login</label>
+                                                <input type="text" id="userLoginToAdd" class="form-control" placeholder="Enter Login" name="login"/>
+                                            </div>
+
+                                            <div class="form-group text-center">
+                                                <label for="userPswToAdd">Password</label>
+                                                <input type="text" id="userPswToAdd" class="form-control" placeholder="Enter Password" name="password"/>
+                                            </div>
+
+                                            <div class="form-group text-center">
+                                               <label for="authUserRole">Select Role</label>
+                                                <select th:name="roleId" class="form-control" id="authUserRole">
+                                                    <option value="1">ADMIN</option>
+                                                    <option value="2">USER</option>
+                                                </select>
+                                            </div>
+
+                                             <div class="col-md-2 col-md-offset-4">
+                                                 <button id="addUserButton" type="submit" class="btn btn-success">Add user</button>
+                                             </div>
+
+                                        </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--START MODAL-->
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleMeModalLabel">User edit</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body container-fluid row">
+                    <div class="col-md-4 col-md-offset-4">
+                        <!-- modal Id -->
+                        <div class="form-group text-center">
+                            <label for="modalId">Id</label>
+                            <input hidden=""/>
+                            <input type="number" id="modalId" class="form-control" placeholder="Id" disabled/>
+                        </div>
+                        <!-- modal Name -->
+                        <div class="form-group text-center">
+                            <label for="modalName">Name</label>
+                            <input type="text" id="modalName" class="form-control" placeholder="Name"/>
+                        </div>
+                        <!-- modal Login -->
+                        <div class="form-group text-center">
+                            <label for="modalLogin">Login</label>
+                            <input type="text" id="modalLogin" class="form-control" placeholder="Login"/>
+                        </div>
+                        <!-- modal Password -->
+                        <div class="form-group text-center">
+                            <label for="modalPassword">Password</label>
+                            <input type="text" id="modalPassword" class="form-control" placeholder="Password"/>
+                        </div>
+
+                        <div class="form-group text-center">
+                            <label for="modalAuthority">Select Role</label>
+                            <select th:name="roleUpdId" class="form-control" id="modalAuthority">
+                            <option value="1">ADMIN</option>
+                            <option value="2">USER</option>
+                            </select>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="closeButton" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button id="editUser" type="button" class="btn btn-primary">Edit user</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--END MODAL -->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+    });
+</script>
+
+</body>
+</html>

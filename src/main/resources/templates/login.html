@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+
+    <title>LOGIN PAGE</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/login.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card card-signin my-5">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Please sign In</h5>
+                    <form th:action="@{/login}" method='POST' class="form-signin">
+                        <div class="form-label-group" th:marginheight="5px">
+                            <input type="text" name="name" class="form-control" placeholder="Username" required autofocus>
+                        </div>
+
+                        <div class="form-label-group" th:marginheight="5px">
+                            <input type="password" name="password" class="form-control" placeholder="Password" required>
+                        </div>
+                        <button class="btn btn-lg btn-primary btn-block text-uppercase" th:marginheight="5px" type="submit">Sign in</button>
+                        <hr class="my-4">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
