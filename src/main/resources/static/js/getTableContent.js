@@ -22,11 +22,11 @@ function getAllUsers() {
                     <td>${user.password}</td> 
                     <td>${stringRoles}</td> 
                     
+                    <td><button id="updateButton" class="btn btn-warning" role="button" data-toggle="modal" data-target="#updateModal" onclick = "fillEditModal(${user.id})"> Update </button></td>
+                    
                     <td><button  id="deleteButton" class="btn btn-danger" role="button" onclick = "deleteUser(${user.id})"> Delete </button></td> 
 
-                    <td><button id="updateButton" class="btn btn-warning" role="button" data-toggle="modal" 
-
-                    data-target="#updateModal" onclick = "fillEditModal(${user.id})"> Update </button></td>
+                    
                      
                     </tr>`);
             })
